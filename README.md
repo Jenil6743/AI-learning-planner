@@ -1,20 +1,20 @@
-# 🎓 AI Personal Learning Planner
+#  AI Personal Learning Planner
 
 An intelligent, personalized learning path generator that creates structured 30-day roadmaps tailored to your current skills and career goals.
 
-## 📋 Overview
+##  Overview
 
 This AI-powered application analyzes your current skill set, identifies gaps relative to your target role, and generates a comprehensive 30-day learning plan with:
 
-- ✅ **Skill Gap Analysis** - Detailed breakdown of matched, partial, and missing skills
-- ✅ **Daily Learning Tasks** - Structured, actionable tasks for each day
-- ✅ **Curated Resources** - Specific tutorials, documentation, and learning materials
-- ✅ **Weekly Milestones** - Clear progress checkpoints
-- ✅ **Export Options** - Download plans in Markdown or Text format
+-  **Skill Gap Analysis** - Detailed breakdown of matched, partial, and missing skills
+-  **Daily Learning Tasks** - Structured, actionable tasks for each day
+-  **Curated Resources** - Specific tutorials, documentation, and learning materials
+-  **Weekly Milestones** - Clear progress checkpoints
+-  **Export Options** - Download plans in Markdown or Text format
 
 ---
 
-## 🚀 Features
+##  Features
 
 ### Core Functionality
 - **Personalized Skill Gap Analysis** - AI-powered comparison of your skills vs. target role requirements
@@ -32,7 +32,7 @@ This AI-powered application analyzes your current skill set, identifies gaps rel
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Frontend**: Streamlit
 - **Backend Logic**: Python
@@ -41,7 +41,7 @@ This AI-powered application analyzes your current skill set, identifies gaps rel
 
 ---
 
-## 📦 Installation & Setup
+##  Installation & Setup
 
 ### Prerequisites
 - Python 3.8 or higher
@@ -80,7 +80,7 @@ The app will open in your browser at `http://localhost:8501`
 
 ---
 
-## 🎯 How to Use
+##  How to Use
 
 ### Quick Start
 1. Open the app in your browser
@@ -100,7 +100,7 @@ The app will open in your browser at `http://localhost:8501`
 
 ---
 
-## 🧠 How It Works
+##  How It Works
 
 ### Architecture Overview
 
@@ -153,20 +153,20 @@ The app uses a two-step LLM process:
 
 ---
 
-## 📊 Sample Output
+##  Sample Output
 
 ### Skill Gap Analysis
 ```
-✅ Skills You Already Have
+ Skills You Already Have
   - Python
   - SQL
   - Git
 
-🔄 Skills That Need Improvement
+ Skills That Need Improvement
   - API Design
   - Testing
 
-📚 Skills You Need to Learn
+ Skills You Need to Learn
   - FastAPI
   - Docker
   - PostgreSQL
@@ -196,7 +196,7 @@ Time Breakdown: 30 min reading, 30 min hands-on practice
 
 ---
 
-## ⚙️ Error Handling
+##  Error Handling
 
 The application includes comprehensive error handling:
 
@@ -208,7 +208,7 @@ The application includes comprehensive error handling:
 
 ---
 
-## 🔮 Future Enhancements
+##  Future Enhancements
 
 - [ ] **Calendar Export** - Download as .ics format for Google Calendar
 - [ ] **Progress Tracking** - Mark completed days and track completion percentage
@@ -220,7 +220,7 @@ The application includes comprehensive error handling:
 
 ---
 
-## 🧪 Testing the App
+##  Testing the App
 
 ### Test Scenarios
 
@@ -241,7 +241,7 @@ The application includes comprehensive error handling:
 
 ---
 
-## 📝 Technical Documentation
+##  Technical Documentation
 
 ### File Structure
 ```
@@ -278,7 +278,7 @@ AI-Learning-Planner/
 
 ---
 
-## 🔐 API Key Setup
+##  API Key Setup
 
 ### Getting a Groq API Key (Free)
 
@@ -306,7 +306,7 @@ GROQ_API_KEY = "gsk_your_key_here"
 
 ---
 
-## 🚨 Known Limitations
+##  Known Limitations
 
 - **LLM Dependency**: Requires active internet connection and Groq API access
 - **Response Variability**: LLM outputs may vary slightly between runs
@@ -316,28 +316,26 @@ GROQ_API_KEY = "gsk_your_key_here"
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
 This project was created as a technical assessment. Contributions are welcome for educational purposes.
 
 ---
 
-## 📄 License
+##  License
 
 MIT License - Feel free to use this project for learning and portfolio purposes.
 
 ---
 
-## 👤 Author
+##  Author
 
 **Jenil Shah**
-- Portfolio: [Your Portfolio URL]
 - LinkedIn: [linkedin.com/in/jenil-shah](https://linkedin.com/in/jenil-shah)
-- GitHub: [github.com/shahjenil76](https://github.com/shahjenil76)
 
 ---
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - Built as a technical assessment for E2M Solutions Private Limited
 - LLM powered by Groq (llama-3.3-70b-versatile)
