@@ -316,8 +316,6 @@ GROQ_API_KEY = "gsk_your_key_here"
 GROQ_API_KEY = "gsk_your_key_here"
 ```
 
----
-
 ##  Testing the App
 
 **Test 1: Backend Engineer Path**
@@ -336,23 +334,12 @@ GROQ_API_KEY = "gsk_your_key_here"
 - Expected: Scikit-learn, TensorFlow/PyTorch, ML algorithms, model deployment, MLOps
 
 ---
-##  Future Enhancements
 
-- [ ] **Progress Tracking** - Mark completed days and track completion percentage
-- [ ] **Persistent Storage** - Save plans to a database so they survive page refresh
-- [ ] **Calendar Export** - Download as .ics format for Google Calendar
-- [ ] **Multi-Role Comparison** - Compare learning paths for different roles side-by-side
-- [ ] **Skill Assessment Quiz** - Interactive quiz to validate current skill level
-- [ ] **Adaptive Difficulty** - Adjust plan difficulty based on user feedback on completed days
-- [ ] **Resource Ratings** - Community ratings for recommended learning materials
-
----
 
 ##  Author
 
 **Jenil Shah**
 - LinkedIn: [linkedin.com/in/jenil-shah](https://linkedin.com/in/jenil-shah)
-- GitHub: [github.com/shahjenil76](https://github.com/shahjenil76)
 
 ---
 
