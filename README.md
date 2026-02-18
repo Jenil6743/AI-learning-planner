@@ -324,8 +324,26 @@ GROQ_API_KEY = "gsk_your_key_here"
 - Expected: Scikit-learn, TensorFlow/PyTorch, ML algorithms, model deployment, MLOps
 
 ---
+## Known Limitations
 
+- LLM occasionally returns fewer than 30 days — handled by 
+  deduplication but not guaranteed to be exactly 30
+- Suggested resources are real but links are not verified — 
+  some URLs may be outdated
+- No memory between sessions — returning users start fresh 
+  every time
+- App depends entirely on Groq API availability — no offline 
+  fallback
 
+## Future Enhancements
+
+- Editable learning plan — let users swap or modify individual days
+- Calendar export — push the plan directly to Google Calendar
+- Progress tracking — mark days complete and resume where you left off
+- Multi-role comparison — generate plans for two roles side by side
+- Verified resource links — validate URLs before showing them to users
+
+---
 ##  Author
 
 **Jenil Shah**
