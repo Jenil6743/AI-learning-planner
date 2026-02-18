@@ -38,9 +38,9 @@ This AI-powered application analyzes your current skill set, identifies gaps rel
 |---|---|
 | Frontend | Streamlit |
 | Backend | Python |
-| LLM | Groq — llama-3.3-70b-versatile (free tier) |
+| LLM | Groq — llama-3.3-70b-versatile |
 | LLM Orchestration | LangChain |
-| JSON Repair | json-repair (fallback parser for malformed LLM responses) |
+| JSON Repair | json-repair |
 
 ---
 
@@ -48,7 +48,7 @@ This AI-powered application analyzes your current skill set, identifies gaps rel
 
 ### Prerequisites
 - Python 3.8 or higher
-- Groq API key — free tier available at https://console.groq.com
+- Groq API key 
 
 ### Step 1: Clone the Repository
 ```bash
@@ -189,7 +189,6 @@ This means a single bad character or minor truncation never crashes the app.
 
 ---
 
-##  Sample Output
 
 ### Skill Gap Analysis
 ```
@@ -243,7 +242,6 @@ Time Breakdown: 30 min reading, 30 min hands-on practice
 
 ---
 
-##  Technical Documentation
 
 ### File Structure
 ```
@@ -338,18 +336,6 @@ GROQ_API_KEY = "gsk_your_key_here"
 - Expected: Scikit-learn, TensorFlow/PyTorch, ML algorithms, model deployment, MLOps
 
 ---
-
-##  Known Limitations
-
-- **LLM Dependency** — Requires active internet connection and Groq API access
-- **Response Variability** — LLM outputs may vary slightly between runs
-- **Rate Limits** — Free tier Groq has rate limits (30 requests/minute)
-- **Resource Accuracy** — Resources are AI-generated and should be verified by users
-- **No Persistence** — Plans are session-based and not saved permanently
-- **No Skill Validation** — Current skills are self-reported with no quiz to verify them
-
----
-
 ##  Future Enhancements
 
 - [ ] **Progress Tracking** - Mark completed days and track completion percentage
@@ -362,12 +348,6 @@ GROQ_API_KEY = "gsk_your_key_here"
 
 ---
 
-##  License
-
-MIT License - Feel free to use this project for learning and portfolio purposes.
-
----
-
 ##  Author
 
 **Jenil Shah**
@@ -376,6 +356,5 @@ MIT License - Feel free to use this project for learning and portfolio purposes.
 
 ---
 
-##  Acknowledgments
 
 - Built as a technical assessment for E2M Solutions Private Limited
