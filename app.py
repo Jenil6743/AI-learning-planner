@@ -249,6 +249,7 @@ Respond ONLY with valid JSON:
             plan_summary = summary_result.get('plan_summary', {}) if summary_result else {
                 "total_days": 30, "focus_areas": [], "weekly_milestones": []
             }
+            # FIX #1: Always hardcode total_days to 30 — never trust LLM for this
             plan_summary['total_days'] = 30
     except Exception as e:
         st.error(f"❌ Error generating plan overview: {e}")
@@ -282,7 +283,18 @@ Respond ONLY with valid JSON:
         st.error(f"❌ Error generating Days 16–30: {e}")
         return None
 
-    all_days = days_1_15 + days_16_30
+    combined = days_1_15 + days_16_30
+
+    # FIX #2: Deduplicate days by day number and sort in order
+    seen = set()
+    unique_days = []
+    for d in combined:
+        day_num = d.get('day')
+        if day_num not in seen:
+            seen.add(day_num)
+            unique_days.append(d)
+    all_days = sorted(unique_days, key=lambda x: x.get('day', 0))
+
     if not all_days:
         st.error("❌ Could not generate the learning plan. Please try again.")
         return None
@@ -411,9 +423,6 @@ Weekly Milestones:
 
 # ─── Main App ────────────────────────────────────────────────────────────────
 
-
-# ─── Main App ────────────────────────────────────────────────────────────────
-
 def main():
 
     st.title("🎓 AI Personal Learning Planner")
@@ -481,10 +490,13 @@ def main():
             value=st.session_state.daily_hours,
             help="How many hours per day can you dedicate to learning?"
         )
+
+        # FIX #3: Safe difficulty level index lookup — avoids ValueError crash
+        levels = ["Beginner", "Intermediate", "Advanced"]
         difficulty_level = st.selectbox(
             "Difficulty Level",
-            ["Beginner", "Intermediate", "Advanced"],
-            index=["Beginner", "Intermediate", "Advanced"].index(st.session_state.difficulty_level),
+            levels,
+            index=levels.index(st.session_state.difficulty_level) if st.session_state.difficulty_level in levels else 0,
             help="Your current proficiency in this field — shapes both the gap analysis and plan depth"
         )
 
@@ -551,7 +563,7 @@ def main():
             col1, col2 = st.columns(2)
 
             with col1:
-                st.subheader("✅ Skills You Already Have")
+                st.subheader("Skills You Already Have")
                 matched = gap_analysis.get('skills_matched', [])
                 if matched:
                     for skill in matched:
@@ -559,7 +571,7 @@ def main():
                 else:
                     st.info("No matching skills identified")
 
-                st.subheader("🔄 Skills That Need Improvement")
+                st.subheader("Skills That Need Improvement")
                 partial = gap_analysis.get('partial_gaps', [])
                 if partial:
                     for skill in partial:
@@ -568,7 +580,7 @@ def main():
                     st.info("No partial gaps identified")
 
             with col2:
-                st.subheader("📚 Skills You Need to Learn")
+                st.subheader("Skills You Need to Learn")
                 missing = gap_analysis.get('missing_skills', [])
                 if missing:
                     for skill in missing:
@@ -583,7 +595,7 @@ def main():
                         st.markdown(f"**{i}.** {skill}")
 
             st.divider()
-            st.subheader("💡 Why These Skills Matter")
+            st.subheader("Why These Skills Matter")
             st.info(gap_analysis.get('reasoning', 'No reasoning provided'))
 
         # ── Tab 2: 30-Day Plan ────────────────────────────────────────────────
@@ -592,10 +604,13 @@ def main():
 
             summary = learning_plan.get('plan_summary', {})
 
+            # FIX #4: Display "30 min" for 0.5h, otherwise show numeric hours
+            hours_display = "30 min" if daily_hours == 0.5 else f"{daily_hours}h"
+
             col1, col2, col3, col4 = st.columns(4)
-            col1.metric("Total Days", 30)
+            col1.metric("Total Days", 30)  # FIX #1: Always 30, never from LLM
             col2.metric("Focus Areas", len(summary.get('focus_areas', [])))
-            col3.metric("Hours / Day", daily_hours)
+            col3.metric("Hours / Day", hours_display)
             col4.metric("Level", difficulty_level)
 
             st.subheader("Focus Areas")
@@ -613,15 +628,21 @@ def main():
 
             st.subheader("Daily Schedule")
             daily_plans = learning_plan.get('daily_plan', [])
+
+            # FIX #5: Use day field value for grouping instead of positional index slicing
+            # This handles missing or out-of-order days correctly
             week_groups = {
-                "Week 1 — Foundations (Days 1–7)":             daily_plans[0:7],
-                "Week 2 — Building Up (Days 8–14)":            daily_plans[7:14],
-                "Week 3 — Hands-On Practice (Days 15–21)":     daily_plans[14:21],
-                "Week 4 — Advanced & Projects (Days 22–30)":   daily_plans[21:30],
+                "Week 1 — Foundations (Days 1–7)":            [d for d in daily_plans if 1  <= d.get('day', 0) <= 7],
+                "Week 2 — Building Up (Days 8–14)":           [d for d in daily_plans if 8  <= d.get('day', 0) <= 14],
+                "Week 3 — Hands-On Practice (Days 15–21)":    [d for d in daily_plans if 15 <= d.get('day', 0) <= 21],
+                "Week 4 — Advanced & Projects (Days 22–30)":  [d for d in daily_plans if 22 <= d.get('day', 0) <= 30],
             }
 
             for week_name, week_plans in week_groups.items():
                 with st.expander(week_name, expanded=(week_name.startswith("Week 1"))):
+                    if not week_plans:
+                        st.info("No days available for this week.")
+                        continue
                     for day_plan in week_plans:
                         st.markdown(f"### Day {day_plan.get('day', '')}: {day_plan.get('objective', '')}")
 
@@ -670,11 +691,11 @@ def main():
                 )
 
             st.divider()
-            st.info("💡 Tip: Save your plan and tick off tasks daily. Consistent 1-hour sessions beat occasional marathon study.")
+            st.info(" Tip: Save your plan and tick off tasks daily. Consistent 1-hour sessions beat occasional marathon study.")
 
     else:
         # ── Welcome Screen ────────────────────────────────────────────────────
-        st.markdown("## Welcome! 👋")
+        st.markdown("## Welcome! ")
         st.write("This AI-powered planner creates a personalized 30-day roadmap to help you reach your career goals.")
 
         st.divider()
@@ -711,7 +732,7 @@ def main():
             st.caption("Download as Markdown or Text to use anywhere.")
 
         st.divider()
-        st.info("👈 Use the sidebar to enter your skills and target role, then click Generate.")
+        st.info("Use the sidebar to enter your skills and target role, then click Generate.")
 
 
 if __name__ == "__main__":
