@@ -249,6 +249,7 @@ Respond ONLY with valid JSON:
             plan_summary = summary_result.get('plan_summary', {}) if summary_result else {
                 "total_days": 30, "focus_areas": [], "weekly_milestones": []
             }
+            plan_summary['total_days'] = 30
     except Exception as e:
         st.error(f"❌ Error generating plan overview: {e}")
         return None
@@ -592,7 +593,7 @@ def main():
             summary = learning_plan.get('plan_summary', {})
 
             col1, col2, col3, col4 = st.columns(4)
-            col1.metric("Total Days", summary.get('total_days', 30))
+            col1.metric("Total Days", 30)
             col2.metric("Focus Areas", len(summary.get('focus_areas', [])))
             col3.metric("Hours / Day", daily_hours)
             col4.metric("Level", difficulty_level)
