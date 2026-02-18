@@ -125,16 +125,6 @@ User Input (Skills + Target Role + Hours + Difficulty)
     Export to Markdown / Text
 ```
 
-### Why 4 LLM Calls?
-
-The plan generation was originally a single LLM call. This caused a JSON parse error in production:
-
-```
-Expecting ',' delimiter: line 419 column 10 (char 20122)
-```
-
-The root cause was response truncation — 30 days of detailed JSON is a large output and Groq's free tier would cut it off mid-sentence, breaking the JSON structure. The fix was to split into three smaller calls: a summary call, Days 1–15, and Days 16–30. Each call is half the size and well within token limits. This eliminated the error completely.
-
 ### Skill Gap Analysis Logic
 
 **LLM Call #1 — Gap Analysis**
@@ -293,7 +283,7 @@ AI-Learning-Planner/
 
 ##  API Key Setup
 
-### Getting a Groq API Key (Free)
+### Getting a Groq API Key
 
 1. Go to https://console.groq.com
 2. Sign up for a free account
